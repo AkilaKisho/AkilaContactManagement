@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>Login</h2>
+    <form (submit)="login()">
+      <div class="mb-3">
+        <label>Email:</label>
+        <input type="email" class="form-control" name="Email" [(ngModel)]="credentials.email" required>
+      </div>
+      <div class="mb-3">
+        <label>Password:</label>
+        <input type="password" class="form-control" name="Password" [(ngModel)]="credentials.password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+  

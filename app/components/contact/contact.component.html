@@ -1,0 +1,111 @@
+<div class="container my-4">
+  <h2 class="text-center mb-4">Contact Management</h2>
+
+  <!-- Add Employee Button -->
+  <div class="text-end">
+    <button class="btn btn-primary" (click)="openModal()">
+      Add Employee
+    </button>
+  </div>
+
+  <!-- Employee List Table -->
+  <div class="table-responsive mt-3">
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>FirstName</th>
+          <th>lastName</th>
+          <th>Email</th>
+          <th>PhoneNumber</th>
+          <th>Address</th>
+          <th>city</th>
+          <th>state</th>
+          <th>country</th>
+          <th>Postal code</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+        <tbody> 
+          @for (item of contactList; track $index) {
+            <tr>
+              <td>{{$index+1}}</td>
+              <td>{{item.firstName }}</td>
+              <td>{{item.lastName }}</td>
+              <td>{{item.email }}</td>
+              <td>{{ item.phoneNumber }}</td>
+              <td>{{item.address}}</td>
+              <td>{{item.city}}</td>
+              <td>{{item.state}}</td>
+              <td>{{item.country}}</td>
+              <td>{{item.postalCode}}</td>
+              <td>
+                <button class="btn btn-warning" (click)="editEmployee(item)">Edit</button>
+                <button class="btn btn-danger" (click)="deleteEmployee(item)">Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody> 
+      </table>
+  </div>
+</div>
+
+<!-- Employee Modal -->
+<div class="modal fade" #contactModal id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="employeeModalLabel">Add Employee</h5>
+          <button type="button" class="btn-close"  (click)="closeModal()" aria-label="Close"></button>
+       
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" [(ngModel)]="contactObj.firstName" name="firstName" class="form-control" id="employeeName" placeholder="First name" required >
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" [(ngModel)]="contactObj.lastName" name="lastName" class="form-control" id="employeeName" placeholder="Last name" required >
+          </div>
+          <div class="mb-3">
+            <label for="employeeEmail" class="form-label">Email</label>
+            <input type="email" [(ngModel)]="contactObj.email" name="email" class="form-control" id="email"  placeholder="Enter Email Id "  required />
+          </div>
+          <div class="mb-3">
+            <label for="phoneNumber" class="form-label">phoneNumber</label>
+            <input type="text" [(ngModel)]="contactObj.phoneNumber" name="phoneNumber" class="form-control" id="employeePhone" placeholder="Enter phone number" required >
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" [(ngModel)]="contactObj.address" name="address" class="form-control" id="employeePhone" placeholder="Enter Address ">
+          </div>
+          <div class="mb-3">
+            <label for="city" class="form-label">city</label>
+            <input type="text" [(ngModel)]="contactObj.city" name="city" class="form-control" id="employeePhone" placeholder="Enter city ">
+          </div>
+          <div class="mb-3">
+            <label for="state" class="form-label">state</label>
+            <input type="text" [(ngModel)]="contactObj.state" name="state" class="form-control" id="employeePhone" placeholder="Enter state ">
+          </div>
+          <div class="mb-3">
+            <label for="country" class="form-label">country</label>
+            <input type="text" [(ngModel)]="contactObj.country" name="country" class="form-control" id="employeePhone" placeholder="Enter country ">
+          </div>
+          <div class="mb-3">
+            <label for="postalCode" class="form-label">postalCode</label>
+            <input type="text" [(ngModel)]="contactObj.postalCode" name="postalCode" class="form-control" id="employeePhone" placeholder="Enter postalCode ">
+          </div>
+        </form>
+      </div>
+     @if(contactObj.Id==0){
+      <button type="button" [(ngModel)]="contactObj.id" class="btn btn-secondary"  (click)="saveEmployee()" data-bs-dismiss="modal">saveEmployee</button>
+       
+     }@else{
+      <button type="button" [(ngModel)]="contactObj.id"   (click)="updateEmployee()" data-bs-dismiss="modal" class="btn btn-primary">Update Employee</button>
+      
+     }
+    </div>
+  </div>
+</div>
